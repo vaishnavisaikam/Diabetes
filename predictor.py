@@ -1,8 +1,12 @@
 import joblib
 import numpy as np
+import os
 
-model = joblib.load("diabetes_model.pkl")
-scaler = joblib.load("scaler.pkl")
+try:
+    model = joblib.load("diabetes_model.pkl")
+    scaler = joblib.load("scaler.pkl")
+except FileNotFoundError as e:
+    raise FileNotFoundError(f"Model files not found: {e}. Make sure diabetes_model.pkl and scaler.pkl are in the app directory.")
 
 
 def predict_diabetes(data):
